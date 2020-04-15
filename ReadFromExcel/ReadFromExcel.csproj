@@ -9,4 +9,8 @@
     <PackageReference Include="ClosedXML" Version="0.94.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
