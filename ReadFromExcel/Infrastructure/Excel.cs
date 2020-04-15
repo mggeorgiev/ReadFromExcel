@@ -50,7 +50,9 @@ namespace ReadFromExcel.Infrastructure
 
         public static void ReadFromExcelFile()
         {
-            var fileName = Path.Combine(Environment.CurrentDirectory, "Data\\TestData.xlsx");
+            var fileName = Path.Combine(Environment.CurrentDirectory, "Data\\speedy.xlsx");
+            //var fileName = Path.Combine(@"C:\Users\smasl\source\repos\ReadFromExcel\ReadFromExcel\Data", "\\speedy.xlsx");
+            //C:\Users\smasl\source\repos\ReadFromExcel\ReadFromExcel\Data
             var workbook = new XLWorkbook(fileName);
             var ws1 = workbook.Worksheet(1);
             int iRow = 1;
@@ -60,7 +62,10 @@ namespace ReadFromExcel.Infrastructure
                 int iColumn = 1;
                 while(!ws1.Cell(iRow,iColumn).IsEmpty())
                 {
-                    row = row + ws1.Cell(iRow, iColumn).Value.ToString() + ",";
+                    //row = row + ws1.Cell(iRow, iColumn).Value.ToString() + ",";
+                    string tempValue = ws1.Cell(iRow, iColumn).Value.ToString();
+                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.WriteLine(ws1.Cell(iRow, iColumn).Value);
                     iColumn++;
                 }
                 Console.WriteLine(row);
