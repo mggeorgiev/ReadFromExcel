@@ -9,22 +9,31 @@ namespace ReadFromExcel
     {
         static void Main(string[] args)
         {
-            StepOne();
+            IEnumerable<All> data = Data();
+            StepOne(data);
+            PrintTestData(data);
             StepTwo();
         }
 
 
-        private static void StepOne()
+        private static void StepOne(IEnumerable<All> data)
         {
             Console.WriteLine("Step One: load data");
 
-            IEnumerable<All> data = Data();
             Excel.SaveToExcel(data);
         }
         private static void StepTwo()
         {
             Console.WriteLine("Step two: read data");
             Excel.ReadFromExcelFile();
+        }
+
+        private static void PrintTestData(IEnumerable<All> data)
+        {
+            foreach(var item in data)
+            {
+                Console.WriteLine("{0},{1},{2},{3},{4}", item.Id, item.Date, item.Cases, item.Recovered, item.Deaths);
+            }
         }
 
         private static IEnumerable<All> Data()
