@@ -50,21 +50,41 @@ namespace ReadFromExcel.Infrastructure
 
         public static void ReadFromExcelFile()
         {
-            var fileName = Path.Combine(Environment.CurrentDirectory, "Data\\TestData.xlsx");
-            var workbook = new XLWorkbook(fileName);
-            var ws1 = workbook.Worksheet(1);
-            int iRow = 1;
-            while (!ws1.Cell(iRow,1).IsEmpty())
+            try
             {
-                var row = "";
-                int iColumn = 1;
-                while(!ws1.Cell(iRow,iColumn).IsEmpty())
+                var fileName = Path.Combine(Environment.CurrentDirectory, "Data\\TestData.xlsx");
+                var workbook = new XLWorkbook(fileName);
+                var ws1 = workbook.Worksheet(1);
+                int iRow = 1;
+                while (!ws1.Cell(iRow,1).IsEmpty())
                 {
-                    row = row + ws1.Cell(iRow, iColumn).Value.ToString() + ",";
-                    iColumn++;
+                    var row = "";
+                    int iColumn = 1;
+                    while(!ws1.Cell(iRow,iColumn).IsEmpty())
+                    {
+                        row = row + ws1.Cell(iRow, iColumn).Value.ToString() + ",";
+                        iColumn++;
+                    }
+                    Console.WriteLine(row);
+                    iRow++;
                 }
-                Console.WriteLine(row);
-                iRow++;
+            }
+            catch (FileNotFoundException e)
+            {
+                // FileNotFoundExceptions are handled here.
+                Console.WriteLine("File {0} not found", e.FileName);
+            }
+            catch (IOException e)
+            {
+                // Extract some information from this exception, and then
+                // throw it to the parent method.
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+                throw;
+            }
+            finally
+            {
+
             }
         }
     }   
