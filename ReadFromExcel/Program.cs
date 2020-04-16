@@ -7,6 +7,7 @@ namespace ReadFromExcel
 {
     class Program
     {
+        Console.OutputEncoding = Encoding.UTF8;
         static void Main(string[] args)
         {
             IEnumerable<All> data = Data();
@@ -32,6 +33,7 @@ namespace ReadFromExcel
         {
             foreach(var item in data)
             {
+
                 Console.WriteLine("{0},{1},{2},{3},{4}", item.Id, item.Date, item.Cases, item.Recovered, item.Deaths);
             }
         }
